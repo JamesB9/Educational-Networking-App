@@ -1,0 +1,10 @@
+QMenuBar{
+    background-color: blue;
+    padding: 10px;
+    font-weight: bold;
+    font-family: impact;
+    font-size: 32px;
+}
+QMainWindow{
+    background-color: gray;
+}

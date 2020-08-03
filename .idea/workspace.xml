@@ -43,10 +43,20 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/PySide2 Qt Tutorials" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
-  <component name="RunManager" selected="Python.pyside2 custom gui">
-    <configuration name="kivy test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\JamesBurling\Documents\GitHub\Educational-Networking-App\PySide2 Qt Tutorials\assets" />
+      <recent name="C:\Users\JamesBurling\Documents\GitHub\Educational-Networking-App\PySide2 Qt Tutorials" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\JamesBurling\Documents\GitHub\Educational-Networking-App\PySide2 Qt Tutorials" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Main">
+    <configuration name="Button" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Educational-Networking-App" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -54,11 +64,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Testing Things" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PySide2 Qt Tutorials" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/kivy test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PySide2 Qt Tutorials/Button.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -67,7 +77,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="nonScapyTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Custom Images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Educational-Networking-App" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -75,11 +85,53 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Testing Things" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PySide2 Qt Tutorials" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/nonScapyTest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PySide2 Qt Tutorials/Custom Images.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Dialog Box" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Educational-Networking-App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PySide2 Qt Tutorials" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PySide2 Qt Tutorials/Dialog Box.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Educational-Networking-App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project Files" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project Files/Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -109,55 +161,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pyside2 custom gui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Educational-Networking-App" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Testing Things" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/pyside2 custom gui.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="scapyTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Educational-Networking-App" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Testing Things" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/scapyTest.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.pyside2 custom gui" />
+        <item itemvalue="Python.Main" />
+        <item itemvalue="Python.Custom Images" />
+        <item itemvalue="Python.Dialog Box" />
+        <item itemvalue="Python.Button" />
         <item itemvalue="Python.pyside2 Test" />
-        <item itemvalue="Python.kivy test" />
-        <item itemvalue="Python.scapyTest" />
-        <item itemvalue="Python.nonScapyTest" />
       </list>
     </recent_temporary>
   </component>
@@ -187,26 +197,50 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2539" height="403" key="GridCell.Tab.0.bottom" timestamp="1596116937293">
+    <state x="1041" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596448870405">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="1899" height="285" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1595800667834" />
-    <state width="2539" height="403" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596116937293" />
-    <state width="2539" height="403" key="GridCell.Tab.0.center" timestamp="1596116937293">
+    <state x="1041" y="507" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596448870405" />
+    <state x="1010" y="452" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596450785607">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="1899" height="285" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1595800667834" />
-    <state width="2539" height="403" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596116937293" />
-    <state width="2539" height="403" key="GridCell.Tab.0.left" timestamp="1596116937293">
+    <state x="1010" y="452" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596450785607" />
+    <state width="2539" height="566" key="GridCell.Tab.0.bottom" timestamp="1596452820642">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="1899" height="285" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1595800667833" />
-    <state width="2539" height="403" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596116937293" />
-    <state width="2539" height="403" key="GridCell.Tab.0.right" timestamp="1596116937293">
+    <state width="1899" height="403" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1596391501774" />
+    <state width="2539" height="566" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452820642" />
+    <state width="2539" height="566" key="GridCell.Tab.0.center" timestamp="1596452820641">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="1899" height="285" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1595800667834" />
-    <state width="2539" height="403" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596116937293" />
+    <state width="1899" height="403" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1596391501774" />
+    <state width="2539" height="566" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452820641" />
+    <state width="2539" height="566" key="GridCell.Tab.0.left" timestamp="1596452820641">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1899" height="403" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1596391501774" />
+    <state width="2539" height="566" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452820641" />
+    <state width="2539" height="566" key="GridCell.Tab.0.right" timestamp="1596452820641">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1899" height="403" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1596391501774" />
+    <state width="2539" height="566" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452820641" />
+    <state width="2539" height="496" key="GridCell.Tab.1.bottom" timestamp="1596452792454">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2539" height="496" key="GridCell.Tab.1.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452792454" />
+    <state width="2539" height="496" key="GridCell.Tab.1.center" timestamp="1596452792454">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2539" height="496" key="GridCell.Tab.1.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452792454" />
+    <state width="2539" height="496" key="GridCell.Tab.1.left" timestamp="1596452792454">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2539" height="496" key="GridCell.Tab.1.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452792454" />
+    <state width="2539" height="496" key="GridCell.Tab.1.right" timestamp="1596452792454">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2539" height="496" key="GridCell.Tab.1.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452792454" />
     <state x="560" y="569" key="SettingsEditor" timestamp="1595946502916">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
