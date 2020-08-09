@@ -56,27 +56,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.Main">
-    <configuration name="Button" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Educational-Networking-App" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PySide2 Qt Tutorials" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PySide2 Qt Tutorials/Button.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Custom Images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Educational-Networking-App" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,7 +119,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pyside2 Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="stackedWidget test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Educational-Networking-App" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -152,7 +131,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/pyside2 Test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/stackedWidget test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tabs example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Educational-Networking-App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Testing Things" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/tabs example.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -164,10 +164,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Main" />
+        <item itemvalue="Python.tabs example" />
+        <item itemvalue="Python.stackedWidget test" />
         <item itemvalue="Python.Custom Images" />
         <item itemvalue="Python.Dialog Box" />
-        <item itemvalue="Python.Button" />
-        <item itemvalue="Python.pyside2 Test" />
       </list>
     </recent_temporary>
   </component>
@@ -183,6 +183,9 @@
       <updated>1595686355875</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -205,42 +208,42 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="1010" y="452" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596450785607" />
-    <state width="2539" height="566" key="GridCell.Tab.0.bottom" timestamp="1596452820642">
+    <state width="2539" height="257" key="GridCell.Tab.0.bottom" timestamp="1596980928088">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state width="1899" height="403" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1596391501774" />
-    <state width="2539" height="566" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452820642" />
-    <state width="2539" height="566" key="GridCell.Tab.0.center" timestamp="1596452820641">
+    <state width="2539" height="257" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596980928088" />
+    <state width="2539" height="257" key="GridCell.Tab.0.center" timestamp="1596980928088">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state width="1899" height="403" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1596391501774" />
-    <state width="2539" height="566" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452820641" />
-    <state width="2539" height="566" key="GridCell.Tab.0.left" timestamp="1596452820641">
+    <state width="2539" height="257" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596980928088" />
+    <state width="2539" height="257" key="GridCell.Tab.0.left" timestamp="1596980928087">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state width="1899" height="403" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1596391501774" />
-    <state width="2539" height="566" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452820641" />
-    <state width="2539" height="566" key="GridCell.Tab.0.right" timestamp="1596452820641">
+    <state width="2539" height="257" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596980928087" />
+    <state width="2539" height="257" key="GridCell.Tab.0.right" timestamp="1596980928088">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state width="1899" height="403" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1596391501774" />
-    <state width="2539" height="566" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452820641" />
-    <state width="2539" height="496" key="GridCell.Tab.1.bottom" timestamp="1596452792454">
+    <state width="2539" height="257" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596980928088" />
+    <state width="2539" height="496" key="GridCell.Tab.1.bottom" timestamp="1596452973524">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2539" height="496" key="GridCell.Tab.1.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452792454" />
-    <state width="2539" height="496" key="GridCell.Tab.1.center" timestamp="1596452792454">
+    <state width="2539" height="496" key="GridCell.Tab.1.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452973524" />
+    <state width="2539" height="496" key="GridCell.Tab.1.center" timestamp="1596452973524">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2539" height="496" key="GridCell.Tab.1.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452792454" />
-    <state width="2539" height="496" key="GridCell.Tab.1.left" timestamp="1596452792454">
+    <state width="2539" height="496" key="GridCell.Tab.1.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452973524" />
+    <state width="2539" height="496" key="GridCell.Tab.1.left" timestamp="1596452973524">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2539" height="496" key="GridCell.Tab.1.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452792454" />
-    <state width="2539" height="496" key="GridCell.Tab.1.right" timestamp="1596452792454">
+    <state width="2539" height="496" key="GridCell.Tab.1.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452973524" />
+    <state width="2539" height="496" key="GridCell.Tab.1.right" timestamp="1596452973524">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2539" height="496" key="GridCell.Tab.1.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452792454" />
+    <state width="2539" height="496" key="GridCell.Tab.1.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596452973524" />
     <state x="560" y="569" key="SettingsEditor" timestamp="1595946502916">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
