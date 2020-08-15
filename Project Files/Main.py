@@ -122,6 +122,7 @@ class PingScreen(QWidget):
 
     def init_text_output(self):
         output_box = QLabel()
+        output_box.setObjectName("outputBox")
         output_box.setText("Hello")
         return output_box
 
@@ -139,13 +140,13 @@ class PingScreen(QWidget):
         else:  # If at least one packet is returned
             ping_output = f"The Host ({self.ipv4_address_edit.text()}) is UP\n"
             for index, latency in enumerate(latency_list):
-                ping_output += f"Packet {index+1} : {round(latency,1)} ms\n"
+                ping_output += f"Packet {index+1} : {latency:.1f} ms\n"
 
             # Calculating average, min and max ping
-            average_ping = round(sum(latency_list) / len(latency_list),1)
-            max_ping = round(max(latency_list),1)
-            min_ping = round(min(latency_list),1)
-            ping_output += f"Average: {average_ping} ms, Min: {min_ping} ms, Max: {max_ping} ms"
+            average_ping = sum(latency_list) / len(latency_list)
+            max_ping = max(latency_list)
+            min_ping = min(latency_list)
+            ping_output += f"Average: {average_ping:.1f} ms, Min: {min_ping:.1f} ms, Max: {max_ping:.1f} ms"
 
             self.output_box.setText(ping_output)
 

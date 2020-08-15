@@ -42,6 +42,13 @@ QLabel{
     font-size: 20px;
 }
 
+#outputBox{
+    background-color: black;
+    color: #33FF33;
+    border-style: solid;
+    padding:10px;
+}
+
 QLineEdit{
     font-size: 20px;
     padding: 3px;
