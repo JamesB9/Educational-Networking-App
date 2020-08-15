@@ -53,3 +53,8 @@ QLineEdit{
     font-size: 20px;
     padding: 3px;
 }
+QToolTip {
+    padding:2px;
+    font-size:16px;
+    background-color:white;
+}

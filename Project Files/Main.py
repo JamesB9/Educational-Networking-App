@@ -7,6 +7,7 @@ from PySide2.QtQuick import QQuickView
 from PySide2.QtCore import QUrl, Slot, Qt, SIGNAL
 
 import NetworkPy # NetworkPy is the custom python file I made
+import TooltipsPy
 
 
 # The main window of the program
@@ -14,6 +15,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setWindowTitle("Multi-purpose, Educational Networking Tool")
+
 
         # Main Menu Bar
         self.init_menu_bar()
@@ -96,11 +98,12 @@ class PingScreen(QWidget):
     def init_form(self):
         input_form = QWidget()
         input_form.setMaximumWidth(400)
-
         input_form.setObjectName("PingForm")
 
         ipv4_address_label = QLabel('Host Address:')
+        ipv4_address_label.setToolTip(TooltipsPy.HOST_ADDRESS)
         self.ipv4_address_edit = QLineEdit()
+        self.ipv4_address_edit.setToolTip(TooltipsPy.HOST_ADDRESS)
 
         count_label = QLabel('No. of Requests:')
         self.count_edit = QLineEdit()
@@ -123,6 +126,7 @@ class PingScreen(QWidget):
     def init_text_output(self):
         output_box = QLabel()
         output_box.setObjectName("outputBox")
+
         output_box.setText("Hello")
         return output_box
 
@@ -130,7 +134,8 @@ class PingScreen(QWidget):
         print(f"PINGING {self.ipv4_address_edit.text()}")
 
         if self.count_edit.text() != '':
-            response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1, count=self.count_edit.text())
+            response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1,
+                                                            count=self.count_edit.text())
         else:
             response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1)
 
@@ -194,7 +199,7 @@ if __name__ == "__main__":
 
     # Creating the Main Window
     window = MainWindow()
-    window.resize(800, 600)
+    window.resize(1280, 720)
     window.show()
 
     # Execute application
