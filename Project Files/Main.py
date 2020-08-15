@@ -6,8 +6,9 @@ from PySide2.QtWidgets import *
 from PySide2.QtQuick import QQuickView
 from PySide2.QtCore import QUrl, Slot, Qt, SIGNAL
 
-import NetworkPy # NetworkPy is the custom python file I made
+import NetworkPy  # NetworkPy is the custom python file I made
 import TooltipsPy
+import LearningPy
 
 
 # The main window of the program
@@ -15,7 +16,6 @@ class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setWindowTitle("Multi-purpose, Educational Networking Tool")
-
 
         # Main Menu Bar
         self.init_menu_bar()
@@ -81,32 +81,57 @@ class PingScreen(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
-        self.ipv4_address_edit = ""
-        self.port_edit = ""
-
-        layout = QVBoxLayout()
-        layout.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        layout = QGridLayout()
 
         input_form = self.init_form()
-        layout.addWidget(input_form)
 
-        self.output_box = self.init_text_output()
-        layout.addWidget(self.output_box)
+        # Console Output Box
+        output_box_area = QScrollArea()
+        output_box_area.setMinimumWidth(500)
+        output_box_area.setObjectName("outputBox")
+
+        self.output_box = QLabel()
+        self.output_box.setText("This is where the output of your PING will appear")
+
+        output_box_area.setWidget(self.output_box)
+
+        # Information Area
+        info_area = QScrollArea()
+        info_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        info_area.setFixedWidth(400)
+        info_area.setObjectName("learningBox")
+        # Label
+        info_label = QLabel()
+        info_label.setFixedWidth(360)
+        info_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        info_label.setWordWrap(True)
+        info_label.setText(LearningPy.LEARNING_PING)
+        info_area.setWidget(info_label)
+
+        # Adding widgets to the ping page layout
+        layout.addWidget(input_form, 0, 0)
+        layout.addWidget(output_box_area, 0, 1, 2, 1)
+        layout.addWidget(info_area, 1, 0)
 
         self.setLayout(layout)
 
     def init_form(self):
         input_form = QWidget()
         input_form.setMaximumWidth(400)
+        input_form.setMaximumHeight(150)
         input_form.setObjectName("PingForm")
 
+        # Host Address Label & Input Field
         ipv4_address_label = QLabel('Host Address:')
-        ipv4_address_label.setToolTip(TooltipsPy.HOST_ADDRESS)
         self.ipv4_address_edit = QLineEdit()
+        ipv4_address_label.setToolTip(TooltipsPy.HOST_ADDRESS)
         self.ipv4_address_edit.setToolTip(TooltipsPy.HOST_ADDRESS)
 
+        # Number of requests Label & Input Field
         count_label = QLabel('No. of Requests:')
         self.count_edit = QLineEdit()
+        count_label.setToolTip(TooltipsPy.NUMBER_OF_REQUESTS)
+        self.count_edit.setToolTip(TooltipsPy.NUMBER_OF_REQUESTS)
 
         ping_button = QPushButton("COMMENCE PING")
         ping_button.clicked.connect(self.ping)
@@ -123,13 +148,6 @@ class PingScreen(QWidget):
 
         return input_form
 
-    def init_text_output(self):
-        output_box = QLabel()
-        output_box.setObjectName("outputBox")
-
-        output_box.setText("Hello")
-        return output_box
-
     def ping(self):
         print(f"PINGING {self.ipv4_address_edit.text()}")
 
@@ -139,21 +157,23 @@ class PingScreen(QWidget):
         else:
             response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1)
 
-        if all(packet is None for packet in response_packets): # If all packets are None
+        if all(packet is None for packet in response_packets):  # If all packets are None
             ping_output = f"The Host ({self.ipv4_address_edit.text()}) is Down"
             self.output_box.setText(ping_output)
+            self.output_box.adjustSize()
         else:  # If at least one packet is returned
             ping_output = f"The Host ({self.ipv4_address_edit.text()}) is UP\n"
             for index, latency in enumerate(latency_list):
-                ping_output += f"Packet {index+1} : {latency:.1f} ms\n"
+                ping_output += f"Packet {index + 1} : {latency:.1f} ms\n"
 
             # Calculating average, min and max ping
             average_ping = sum(latency_list) / len(latency_list)
             max_ping = max(latency_list)
             min_ping = min(latency_list)
             ping_output += f"Average: {average_ping:.1f} ms, Min: {min_ping:.1f} ms, Max: {max_ping:.1f} ms"
-
+            print(ping_output)
             self.output_box.setText(ping_output)
+            self.output_box.adjustSize()
 
 
 class PacketSniffer(QWidget):

@@ -37,6 +37,10 @@ QStatusBar{
 #PingForm{
     background-color:white;
 }
+#PingForm QPushButton{
+    padding:4px;
+    font-size:16px;
+}
 
 QLabel{
     font-size: 20px;
@@ -44,9 +48,25 @@ QLabel{
 
 #outputBox{
     background-color: black;
+    color:#33FF33;
+    border-style: solid;
+    padding:10px;
+    border:1px solid #33FF33;
+}
+#outputBox QLabel{
+    background-color: rgba(1,1,1,1);
+    color: #33FF33;
+}
+
+#learningBox{
+    background-color: white;
     color: #33FF33;
     border-style: solid;
     padding:10px;
+}
+#learningBox QLabel{
+    background-color: rgba(0,0,0,0);
+    color: black;
 }
 
 QLineEdit{
