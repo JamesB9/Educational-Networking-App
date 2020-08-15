@@ -33,3 +33,16 @@ QMenu{
 QStatusBar{
     background-color:white;
 }
+
+#PingForm{
+    background-color:white;
+}
+
+QLabel{
+    font-size: 20px;
+}
+
+QLineEdit{
+    font-size: 20px;
+    padding: 3px;
+}

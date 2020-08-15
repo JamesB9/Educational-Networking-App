@@ -6,6 +6,8 @@ from PySide2.QtWidgets import *
 from PySide2.QtQuick import QQuickView
 from PySide2.QtCore import QUrl, Slot, Qt, SIGNAL
 
+import NetworkPy # NetworkPy is the custom python file I made
+
 
 # The main window of the program
 class MainWindow(QMainWindow):
@@ -76,13 +78,32 @@ class MainWindow(QMainWindow):
 class PingScreen(QWidget):
     def __init__(self):
         QWidget.__init__(self)
-        self.setMaximumWidth(200)
 
-        ipv4_address_label = QLabel('IPv4 Address:')
+        self.ipv4_address_edit = ""
+        self.port_edit = ""
+
+        layout = QVBoxLayout()
+        layout.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+
+        input_form = self.init_form()
+        layout.addWidget(input_form)
+
+        self.output_box = self.init_text_output()
+        layout.addWidget(self.output_box)
+
+        self.setLayout(layout)
+
+    def init_form(self):
+        input_form = QWidget()
+        input_form.setMaximumWidth(400)
+
+        input_form.setObjectName("PingForm")
+
+        ipv4_address_label = QLabel('Host Address:')
         self.ipv4_address_edit = QLineEdit()
 
-        port_label = QLabel('Port Number:')
-        self.port_edit = QLineEdit()
+        count_label = QLabel('No. of Requests:')
+        self.count_edit = QLineEdit()
 
         ping_button = QPushButton("COMMENCE PING")
         ping_button.clicked.connect(self.ping)
@@ -92,13 +113,41 @@ class PingScreen(QWidget):
         layout.setFormAlignment(Qt.AlignLeft)
 
         layout.addRow(ipv4_address_label, self.ipv4_address_edit)
-        layout.addRow(port_label, self.port_edit)
+        layout.addRow(count_label, self.count_edit)
         layout.addRow(ping_button)
 
-        self.setLayout(layout)
+        input_form.setLayout(layout)
+
+        return input_form
+
+    def init_text_output(self):
+        output_box = QLabel()
+        output_box.setText("Hello")
+        return output_box
 
     def ping(self):
-        print(f"PINGING {self.ipv4_address_edit.text()}:{self.port_edit.text()}")
+        print(f"PINGING {self.ipv4_address_edit.text()}")
+
+        if self.count_edit.text() != '':
+            response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1, count=self.count_edit.text())
+        else:
+            response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1)
+
+        if all(packet is None for packet in response_packets): # If all packets are None
+            ping_output = f"The Host ({self.ipv4_address_edit.text()}) is Down"
+            self.output_box.setText(ping_output)
+        else:  # If at least one packet is returned
+            ping_output = f"The Host ({self.ipv4_address_edit.text()}) is UP\n"
+            for index, latency in enumerate(latency_list):
+                ping_output += f"Packet {index+1} : {round(latency,1)} ms\n"
+
+            # Calculating average, min and max ping
+            average_ping = round(sum(latency_list) / len(latency_list),1)
+            max_ping = round(max(latency_list),1)
+            min_ping = round(min(latency_list),1)
+            ping_output += f"Average: {average_ping} ms, Min: {min_ping} ms, Max: {max_ping} ms"
+
+            self.output_box.setText(ping_output)
 
 
 class PacketSniffer(QWidget):
