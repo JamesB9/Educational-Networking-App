@@ -1,5 +1,5 @@
 import sys
-from scapy.layers.inet import ICMP, IP
+from scapy.layers.inet import ICMP, IP, UDP, TCP
 from scapy.sendrecv import sr1
 import time
 import ipaddress
@@ -16,10 +16,8 @@ def ping(dst_ip, count="3", timeout=3):
     packets = []
     latency_list = []
     for i in range(int(count)):
-        print(f"\nPing {i + 1}")
-
         start_time = time.time()
-        response_packet = sr1(icmp_packet, timeout=timeout)
+        response_packet = sr1(icmp_packet, timeout=timeout, verbose=0)
         latency = (time.time() - start_time) * 1000
 
         packets.append(response_packet)
@@ -33,12 +31,12 @@ def ping(dst_ip, count="3", timeout=3):
 def ping_sweep(dst_ip, subnet_mask, count="3", timeout=3):
     # Calculating subnet address
     subnet, mask_bits = calculate_subnet(dst_ip, subnet_mask)
-    address_list = [str(ip) for ip in ipaddress.IPv4Network(subnet+"/"+str(mask_bits))]
+    address_list = [str(ip) for ip in ipaddress.IPv4Network(subnet + "/" + str(mask_bits))]
 
     print("PING SWEEP:", subnet, "/", mask_bits)
     for address in address_list:
-        print("Scanning Address: "+address)
-        packets , latency_list = ping(address, count=1, timeout=0.1)
+        print("Scanning Address: " + address)
+        packets, latency_list = ping(address, count=1, timeout=0.1)
 
         if all(packet is None for packet in packets):  # If No response from host
             print("Host is Down")
@@ -64,3 +62,22 @@ def calculate_subnet(ip, subnet_mask):
 
     return subnet, mask_bits
 
+
+def traceroute(dst_ip):
+    reply_packets = []
+
+    for ttl in range(1, 30):
+        packet = IP(dst=dst_ip, ttl=ttl) / UDP(dport=33434)  # Port 33434 is used for traceroute
+
+        reply_packet = sr1(packet, verbose=0, timeout=2)
+        reply_packets.append(reply_packet)
+
+        if reply_packet is None:
+            print("*")
+        elif reply_packet.type == 3:
+            print("Done!",reply_packet.src)
+            break
+        else:
+            print(f"Hop {ttl}: {reply_packet.src}")
+
+    return reply_packets

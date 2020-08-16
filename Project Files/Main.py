@@ -55,6 +55,18 @@ class MainWindow(QMainWindow):
         ping_action.triggered.connect(self.ping_screen)
         self.tools_menu.addAction(ping_action)
 
+        traceroute_action = QAction("Traceroute", self)  # Trace Route QAction
+        traceroute_action.setShortcut("Ctrl+Alt+T")
+        traceroute_action.triggered.connect(self.traceroute_screen)
+        self.tools_menu.addAction(traceroute_action)
+
+        # HELP BUTTON ---------------------
+
+        help_action = QAction("Help", self)  # Packet Sniffer QAction
+        help_action.triggered.connect(self.help_screen)
+        self.menu.addAction(help_action)
+
+
     def init_status_bar(self):
         # Creating Status Bar
         status_bar = QStatusBar()
@@ -72,10 +84,17 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(PacketSniffer())
         print("Central Widget: %s", self.centralWidget())
 
+    def traceroute_screen(self):
+        self.setCentralWidget(TracerouteScreen())
+        print("Central Widget: %s", self.centralWidget())
+
     def home_screen(self):
         self.setCentralWidget(HomeScreen())
         print("Central Widget: %s", self.centralWidget())
 
+    def help_screen(self):
+        self.setCentralWidget(HelpScreen())
+        print("Central Widget: %s", self.centralWidget())
 
 class PingScreen(QWidget):
     def __init__(self):
@@ -210,6 +229,101 @@ class CoolProgressBar(QProgressBar):
 
         self.setTextVisible(True)
         self.setAlignment(Qt.AlignCenter)
+
+
+class HelpScreen(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+
+        welcome_label = QLabel('This is the help screen')
+
+        layout = QVBoxLayout()
+        layout.addWidget(welcome_label)
+
+        self.setLayout(layout)
+
+
+class TracerouteScreen(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+
+        layout = QGridLayout()
+
+        input_form = self.init_form()
+
+        # Console Output Box
+        output_box_area = QScrollArea()
+        output_box_area.setMinimumWidth(500)
+        output_box_area.setObjectName("outputBox")
+
+        self.output_box = QLabel()
+        self.output_box.setText("This is where the output of your Traceroute will appear")
+
+        output_box_area.setWidget(self.output_box)
+
+        # Information Area
+        info_area = QScrollArea()
+        info_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        info_area.setFixedWidth(400)
+        info_area.setObjectName("learningBox")
+        # Label
+        info_label = QLabel()
+        info_label.setFixedWidth(360)
+        info_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        info_label.setWordWrap(True)
+        info_label.setText(LearningPy.LEARNING_PING)
+        info_area.setWidget(info_label)
+
+        # Adding widgets to the ping page layout
+        layout.addWidget(input_form, 0, 0)
+        layout.addWidget(output_box_area, 0, 1, 2, 1)
+        layout.addWidget(info_area, 1, 0)
+
+        self.setLayout(layout)
+
+    def init_form(self):
+        input_form = QWidget()
+        input_form.setMaximumWidth(400)
+        input_form.setMaximumHeight(150)
+        input_form.setObjectName("PingForm")
+
+        # Host Address Label & Input Field
+        ipv4_address_label = QLabel('Host Address:')
+        self.ipv4_address_edit = QLineEdit()
+        ipv4_address_label.setToolTip(TooltipsPy.HOST_ADDRESS)
+        self.ipv4_address_edit.setToolTip(TooltipsPy.HOST_ADDRESS)
+
+        ping_button = QPushButton("COMMENCE TRACEROUTE")
+        ping_button.clicked.connect(self.traceroute)
+
+        layout = QFormLayout()
+        layout.setLabelAlignment(Qt.AlignLeft)
+        layout.setFormAlignment(Qt.AlignLeft)
+
+        layout.addRow(ipv4_address_label, self.ipv4_address_edit)
+        layout.addRow(ping_button)
+
+        input_form.setLayout(layout)
+
+        return input_form
+
+    def traceroute(self):
+        print(f"TRACEROUTE: {self.ipv4_address_edit.text()}")
+        response_packets = NetworkPy.traceroute(self.ipv4_address_edit.text())
+
+        output_text = f"Traceroute to host ({self.ipv4_address_edit.text()}) :\n\n"
+        for index, packet in enumerate(response_packets):
+            if packet is None:
+                output_text += f"{index+1:>02} - *\n"
+            else:
+                output_text += f"{index+1:>02} - {packet.src}\n"
+
+        output_text += f"\nTraceroute Completed to {self.ipv4_address_edit.text()}"
+
+        self.output_box.setText(output_text)
+        self.output_box.adjustSize()
+
+
 
 
 if __name__ == "__main__":
