@@ -78,3 +78,7 @@ QToolTip {
     font-size:16px;
     background-color:white;
 }
+
+QScrollBar:vertical {
+    width:10px;
+ }
