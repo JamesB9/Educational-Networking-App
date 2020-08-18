@@ -1,9 +1,11 @@
 import sys
 from scapy.layers.inet import ICMP, IP, UDP, TCP
-from scapy.sendrecv import sr1
+from scapy.sendrecv import sr1, sniff
 import time
 import ipaddress
-
+from scapy.all import *
+from threading import Thread, Event
+from time import sleep
 
 # Sends an ICMP packet to the given IP address, and returns the respone packet.
 # The return will equal 'None' if there was no response (the host is down)
@@ -81,3 +83,38 @@ def traceroute(dst_ip):
             print(f"Hop {ttl}: {reply_packet.src}")
 
     return reply_packets
+
+
+
+class Sniffer(Thread):
+    def  __init__(self):
+        super().__init__()
+
+        self.daemon = True
+        self.socket = None
+        self.stop_sniffer = Event()
+        self.pkt = ''
+
+    def run(self):
+        self.socket = conf.L2listen(
+            type=ETH_P_ALL,
+            filter="ip"
+        )
+
+        sniff(
+            opened_socket=self.socket,
+            prn=self.print_packet,
+            stop_filter=self.should_stop_sniffer,
+            timeout = 10
+        )
+
+    def join(self, timeout=None):
+        self.stop_sniffer.set()
+        super().join(timeout)
+
+    def should_stop_sniffer(self, packet):
+        return self.stop_sniffer.isSet()
+
+    def print_packet(self, packet):
+        ip_layer = packet.getlayer(IP)
+        self.pkt = "[!] New Packet: {src} -> {dst}\n".format(src=ip_layer.src, dst=ip_layer.dst)
