@@ -2,6 +2,7 @@ import sys
 
 import PySide2
 from PySide2 import QtCore
+from PySide2.QtGui import QPainter, QPen, QBrush
 from PySide2.QtWidgets import *
 from PySide2.QtQuick import QQuickView
 from PySide2.QtCore import QUrl, Slot, Qt, SIGNAL
@@ -67,7 +68,6 @@ class MainWindow(QMainWindow):
         help_action = QAction("Help", self)  # Packet Sniffer QAction
         help_action.triggered.connect(self.help_screen)
         self.menu.addAction(help_action)
-
 
     def init_status_bar(self):
         # Creating Status Bar
@@ -281,7 +281,6 @@ class PacketSniffer(QWidget):
         # self.output_box.adjustSize()
 
 
-
 class HomeScreen(QWidget):
     def __init__(self):
         QWidget.__init__(self)
@@ -389,14 +388,99 @@ class TracerouteScreen(QWidget):
         output_text = f"Traceroute to host ({self.ipv4_address_edit.text()}) :\n\n"
         for index, packet in enumerate(response_packets):
             if packet is None:
-                output_text += f"{index+1:>02} - *\n"
+                output_text += f"{index + 1:>02} - *\n"
             else:
-                output_text += f"{index+1:>02} - {packet.src}\n"
+                output_text += f"{index + 1:>02} - {packet.src}\n"
 
         output_text += f"\nTraceroute Completed to {self.ipv4_address_edit.text()}"
 
         self.output_box.setText(output_text)
         self.output_box.adjustSize()
+
+
+class PacketScreen(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+
+        layout = QGridLayout()
+
+        # Console Output Box
+        packet_area = PacketRenderArea()
+        packet_area.setMinimumWidth(500)
+
+        # Information Area
+        info_area = QScrollArea()
+        info_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        info_area.setFixedWidth(400)
+        info_area.setObjectName("learningBox")
+        # Label
+        info_label = QLabel()
+        info_label.setFixedWidth(360)
+        info_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        info_label.setWordWrap(True)
+        info_label.setText(LearningPy.LEARNING_PACKET)
+        info_area.setWidget(info_label)
+
+        # Adding widgets to the ping page layout
+        layout.addWidget(info_area, 0, 0)
+        layout.addWidget(packet_area, 0, 1, 2, 1)
+
+        self.setLayout(layout)
+
+
+class PacketRenderArea(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+        layout = QVBoxLayout()
+
+        self.header_button = QPushButton("View HEADER Data")
+        self.header_button.setObjectName("packetButton_header")
+        self.header_button.clicked.connect(lambda a: print("Header Clicked"))
+
+        self.payload_button = QPushButton("View PAYLOAD Data")
+        self.payload_button.setObjectName("packetButton_payload")
+        self.payload_button.clicked.connect(lambda a: print("Payload Clicked"))
+
+        self.footer_button = QPushButton("View FOOTER Data")
+        self.footer_button.setObjectName("packetButton_footer")
+        self.footer_button.clicked.connect(lambda a: print("Footer Clicked"))
+
+        layout.addWidget(self.header_button)
+        layout.addWidget(self.payload_button)
+        layout.addWidget(self.footer_button)
+        self.setLayout(layout)
+
+    def paintEvent(self, event):
+        area_width = self.width()
+        area_height = self.height()
+        area_center_x = area_width / 2
+        area_center_y = area_height / 2
+
+        packet_width = self.width() * (2 / 3)
+        packet_height = self.height() * (7 / 8)
+
+        header_fract = 4 / 10
+        payload_fract = 4 / 10
+        footer_fract = 2 / 10
+
+        draw_y = (area_height - packet_height) / 2
+        # Packet Header
+        self.header_button.setGeometry(area_center_x - (packet_width / 2),
+                                       draw_y,
+                                       packet_width,
+                                       packet_height * header_fract)
+        draw_y += packet_height * header_fract
+        # Packet Payload
+        self.payload_button.setGeometry(area_center_x - (packet_width / 2),
+                                        draw_y,
+                                        packet_width,
+                                        packet_height * payload_fract)
+        draw_y += packet_height * payload_fract
+        # Packet Footer
+        self.footer_button.setGeometry(area_center_x - (packet_width / 2),
+                                       draw_y,
+                                       packet_width,
+                                       packet_height * footer_fract)
 
 
 if __name__ == "__main__":
@@ -406,6 +490,7 @@ if __name__ == "__main__":
 
     # Creating the Main Window
     window = MainWindow()
+    window.setCentralWidget(PacketScreen())
     window.resize(1280, 720)
     window.show()
 

@@ -81,4 +81,52 @@ QToolTip {
 
 QScrollBar:vertical {
     width:10px;
- }
+}
+
+#packetButton_header{
+    background-color: rgba(0,255,0,1);
+
+    border-style: outset;
+    border-width: 6px 6px 2px 6px;
+    border-color:black;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+
+    font-size:32px;
+    font-weight:800;
+}
+#packetButton_header:hover{
+    background-color: rgba(0,200,0,1);
+    color: white;
+}
+
+#packetButton_payload{
+    background-color: rgba(255,255,0,1);
+    border-style: outset;
+    border-width: 2px 6px 2px 6px;
+    border-color:black;
+
+    font-size:32px;
+    font-weight:800;
+}
+#packetButton_payload:hover{
+    background-color: rgba(200,200,0,1);
+    color: white;
+}
+
+#packetButton_footer{
+    background-color: rgba(0,0,255,1);
+
+    border-style: outset;
+    border-width: 2px 6px 6px 6px;
+    border-color:black;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+
+    font-size:32px;
+    font-weight:800;
+}
+#packetButton_footer:hover{
+    background-color: rgba(0,0,200,1);
+    color: white;
+}

@@ -1,5 +1,5 @@
 LEARNING_PING = str("<b>The Ping Tool:</b><br>"
-                    
+
                     "<br><u>What is Ping?</u><br><br>"
                     "Ping is a computer network administration software utility used to test the reachability of a "
                     "host on an Internet Protocol (IP) network. It is also the time it takes for a small data set to "
@@ -15,8 +15,14 @@ LEARNING_PING = str("<b>The Ping Tool:</b><br>"
                     )
 
 LEARNING_SNIFF = str("<b>The Sniff Tool:</b><br>"
-                    
-                    "<br><u>What is Sniff?</u><br><br>"
-                    "Network sniffing is the use of a software tool, called a network sniffer," 
-                    "that monitors the data flowing over computer network links in real time"
-                    )
+
+                     "<br><u>What is Sniff?</u><br><br>"
+                     "Network sniffing is the use of a software tool, called a network sniffer,"
+                     "that monitors the data flowing over computer network links in real time"
+                     )
+
+LEARNING_PACKET = str("<b>Packet View:</b><br>"
+
+                      "<br><u>What is Packet?</u><br><br>"
+                      "Packets carry data over the internet. "
+                      )
