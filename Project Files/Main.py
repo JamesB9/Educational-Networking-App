@@ -96,6 +96,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(HelpScreen())
         print("Central Widget: %s", self.centralWidget())
 
+
 class PingScreen(QWidget):
     def __init__(self):
         QWidget.__init__(self)
@@ -322,8 +323,6 @@ class TracerouteScreen(QWidget):
 
         self.output_box.setText(output_text)
         self.output_box.adjustSize()
-
-
 
 
 if __name__ == "__main__":
