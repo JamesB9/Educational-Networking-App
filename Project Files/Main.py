@@ -5,6 +5,8 @@ from PySide2 import QtCore
 from PySide2.QtWidgets import *
 from PySide2.QtQuick import QQuickView
 from PySide2.QtCore import QUrl, Slot, Qt, SIGNAL
+import time
+from threading import Thread, Event
 
 import NetworkPy  # NetworkPy is the custom python file I made
 import TooltipsPy
@@ -199,12 +201,84 @@ class PacketSniffer(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
-        welcome_label = QLabel('This is the Packet Sniffer Screen')
+        layout = QGridLayout()
 
-        layout = QVBoxLayout()
-        layout.addWidget(welcome_label)
+        input_form = self.init_form()
+
+        # Console Output Box
+        output_box_area = QScrollArea()
+        output_box_area.setMinimumWidth(500)
+        output_box_area.setObjectName("outputBox")
+
+        self.output_box = QLabel()
+        self.output_box.setText("This is where the output of your SNIFF will appear")
+
+        output_box_area.setWidget(self.output_box)
+
+        # Information Area
+        info_area = QScrollArea()
+        info_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        info_area.setFixedWidth(400)
+        info_area.setObjectName("learningBox")
+
+        # Label
+        info_label = QLabel()
+        info_label.setFixedWidth(360)
+        info_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        info_label.setWordWrap(True)
+        info_label.setText(LearningPy.LEARNING_SNIFF)
+        info_area.setWidget(info_label)
+
+        # Adding widgets to the ping page layout
+        layout.addWidget(input_form, 0, 0)
+        layout.addWidget(output_box_area, 0, 1, 2, 1)
+        layout.addWidget(info_area, 1, 0)
 
         self.setLayout(layout)
+
+    def init_form(self):
+        input_form = QWidget()
+        input_form.setMaximumWidth(400)
+        input_form.setMaximumHeight(150)
+        input_form.setObjectName("PingForm")
+
+        duration = QLabel('Duration:')
+        self.duration_edit = QLineEdit()
+        duration.setToolTip(TooltipsPy.DURATION)
+        self.duration_edit.setToolTip(TooltipsPy.DURATION)
+
+        sniff_button = QPushButton("SNIFF")
+        sniff_button.clicked.connect(self.sniff)
+
+        layout = QFormLayout()
+        layout.setLabelAlignment(Qt.AlignLeft)
+        layout.setFormAlignment(Qt.AlignLeft)
+
+        layout.addRow(duration, self.duration_edit)
+        layout.addRow(sniff_button)
+
+        input_form.setLayout(layout)
+
+        return input_form
+
+    def sniff(self):
+        sniffer = NetworkPy.Sniffer()
+        sniff_output = f"[*] Start sniffing...\n"
+
+        sniffer.start()
+        sniff_output += sniffer.pkt
+        print(sniff_output)
+        # self.output_box.setText(sniff_output)
+        # self.output_box.adjustSize()
+
+        # sniffer.join(2.0)
+        # if sniffer.is_alive():
+        #     sniffer.socket.close()
+
+        sniff_output += "[*] Stop sniffing"
+        # self.output_box.setText(sniff_output)
+        # self.output_box.adjustSize()
+
 
 
 class HomeScreen(QWidget):

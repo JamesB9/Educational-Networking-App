@@ -13,3 +13,10 @@ LEARNING_PING = str("<b>The Ping Tool:</b><br>"
                     "If the host is down, or does not exist, then no ICMP echo reply will be recieved, and the sent "
                     "ICMP echo request packet will be destroyed."
                     )
+
+LEARNING_SNIFF = str("<b>The Sniff Tool:</b><br>"
+                    
+                    "<br><u>What is Sniff?</u><br><br>"
+                    "Network sniffing is the use of a software tool, called a network sniffer," 
+                    "that monitors the data flowing over computer network links in real time"
+                    )

@@ -6,3 +6,7 @@ HOST_ADDRESS = str("<b>Host Address:</b><br>" +
 NUMBER_OF_REQUESTS = str("<b>Number of Requests:</b><br>" +
                          "This is the number of packets to send."
                          )
+
+DURATION = str("<b>Duration:</b><br>" +
+                   "How long in seconds to sniff."
+                   )
