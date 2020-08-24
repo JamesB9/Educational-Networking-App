@@ -1,7 +1,7 @@
 import sys
 
 import PySide2
-from PySide2 import QtCore
+from PySide2 import QtCore, QtWidgets
 from PySide2.QtGui import QPainter, QPen, QBrush
 from PySide2.QtWidgets import *
 from PySide2.QtQuick import QQuickView
@@ -13,8 +13,11 @@ import NetworkPy  # NetworkPy is the custom python file I made
 import TooltipsPy
 import LearningPy
 
-
 # The main window of the program
+from scapy.layers.inet import IP, ICMP
+from scapy.layers.l2 import Ether
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -399,14 +402,16 @@ class TracerouteScreen(QWidget):
 
 
 class PacketScreen(QWidget):
-    def __init__(self):
+    def __init__(self, packet):
         QWidget.__init__(self)
 
         layout = QGridLayout()
 
         # Console Output Box
-        packet_area = PacketRenderArea()
+        scrollArea = QScrollArea()
+        packet_area = PacketRenderArea(packet)
         packet_area.setMinimumWidth(500)
+        scrollArea.setWidget(packet_area)
 
         # Information Area
         info_area = QScrollArea()
@@ -429,13 +434,88 @@ class PacketScreen(QWidget):
 
 
 class PacketRenderArea(QWidget):
+
+    def __init__(self, packet):
+        QWidget.__init__(self)
+        print(packet.show())
+        packet_layout = QVBoxLayout()
+        packet_layout.setAlignment(Qt.AlignTop)
+        self.setLayout(packet_layout)
+        packet_layout.setSpacing(0)
+        packet_layout.setContentsMargins(0,0,0,0)
+
+        # ETHERNET LAYER
+        ether_layer = QWidget()
+        ether_layer.setObjectName("etherLayer")
+        ether_layer_layout = QGridLayout()
+        ether_layer.setLayout(ether_layer_layout)
+
+      
+
+        dest_mac_label = PacketField("Dst MAC", "")
+        src_mac_label = PacketField("Src MAC", "")
+
+        ether_layer_layout.addWidget(dest_mac_label, 1, 0)
+        ether_layer_layout.addWidget(src_mac_label, 1, 1)
+
+        # IP LAYER
+        ip_layer = QWidget()
+        ip_layer.setObjectName("ipLayer")
+        ip_layer_layout = QGridLayout()
+        ip_layer.setLayout(ip_layer_layout)
+
+        dest_ip_label = PacketField("Dst IP", packet[IP].dst)
+        src_ip_label = PacketField("Src IP", packet[IP].src)
+
+        ip_layer_layout.addWidget(dest_ip_label, 1, 0)
+        ip_layer_layout.addWidget(src_ip_label, 1, 1)
+
+        packet_layout.addWidget(ether_layer)
+        packet_layout.addWidget(ip_layer)
+
+    # def __init__(self, packet):
+    # QWidget.__init__(self)
+    # self.setStyleSheet("QWidget{background-color:white;}")
+    # layout = QGridLayout()
+    # self.setLayout(layout)
+    # packet.show(dump=True)
+
+    # ether_field_names = [field.name for field in Ether.fields_desc]
+    # ip_field_names = [field.name for field in IP.fields_desc]
+    # icmp_field_names = [field.name for field in ICMP.fields_desc]
+    # fields = {field_name: getattr(packet, field_name) for field_name in ether_field_names}
+    # fields2 = {field_name: getattr(packet, field_name) for field_name in ip_field_names}
+    # fields3 = {field_name: getattr(packet, field_name) for field_name in icmp_field_names}
+
+    # fields = {**fields, **fields2, **fields3}
+
+    # row = 0
+    # column = 0
+    # for field in fields:
+    #    widget = QLabel(f"{field}: {str(fields.get(field))}")
+    #    widget.setObjectName("PacketField")
+
+    #    row+=1
+    #    layout.addWidget(widget, row, column)
+
+
+class PacketField(QLabel):
+    def __init__(self, string, value):
+        QLabel.__init__(self)
+        self.setObjectName("PacketField")
+        self.setText(f"{string} : {value}")
+        self.setFixedHeight(35)
+
+"""
+class PacketRenderArea(QWidget):
     def __init__(self):
         QWidget.__init__(self)
-        layout = QVBoxLayout()
+        self.display = self.packet_top_level
+        self.layout = QVBoxLayout()
 
         self.header_button = QPushButton("View HEADER Data")
         self.header_button.setObjectName("packetButton_header")
-        self.header_button.clicked.connect(lambda a: print("Header Clicked"))
+        self.header_button.clicked.connect(self.render_packet_header)
 
         self.payload_button = QPushButton("View PAYLOAD Data")
         self.payload_button.setObjectName("packetButton_payload")
@@ -445,12 +525,53 @@ class PacketRenderArea(QWidget):
         self.footer_button.setObjectName("packetButton_footer")
         self.footer_button.clicked.connect(lambda a: print("Footer Clicked"))
 
-        layout.addWidget(self.header_button)
-        layout.addWidget(self.payload_button)
-        layout.addWidget(self.footer_button)
-        self.setLayout(layout)
+        self.layout.addWidget(self.header_button)
+        self.layout.addWidget(self.payload_button)
+        self.layout.addWidget(self.footer_button)
+        self.setLayout(self.layout)
 
-    def paintEvent(self, event):
+    def render_packet_header(self):
+        self.display = self.packet_header
+        self.payload_button.hide()
+        self.footer_button.hide()
+        self.setLayout(self.layout)
+
+    def packet_top_level(self):
+        area_width = self.width()
+        area_height = self.height()
+        area_center_x = area_width / 2
+        area_center_y = area_height / 2
+
+        packet_width = self.width() * (2 / 3)
+        packet_height = self.height() * (7 / 8)
+
+        header_fract = 4 / 10
+        payload_fract = 4 / 10
+        footer_fract = 2 / 10
+
+        draw_y = (area_height - packet_height) / 2
+
+        # Packet Header
+        self.header_button.setGeometry(area_center_x - (packet_width / 2),
+                                       draw_y,
+                                       packet_width,
+                                       packet_height * header_fract)
+        draw_y += packet_height * header_fract
+
+        # Packet Payload
+        self.payload_button.setGeometry(area_center_x - (packet_width / 2),
+                                        draw_y,
+                                        packet_width,
+                                        packet_height * payload_fract)
+        draw_y += packet_height * payload_fract
+
+        # Packet Footer
+        self.footer_button.setGeometry(area_center_x - (packet_width / 2),
+                                       draw_y,
+                                       packet_width,
+                                       packet_height * footer_fract)
+
+    def packet_header(self):
         area_width = self.width()
         area_height = self.height()
         area_center_x = area_width / 2
@@ -468,20 +589,11 @@ class PacketRenderArea(QWidget):
         self.header_button.setGeometry(area_center_x - (packet_width / 2),
                                        draw_y,
                                        packet_width,
-                                       packet_height * header_fract)
-        draw_y += packet_height * header_fract
-        # Packet Payload
-        self.payload_button.setGeometry(area_center_x - (packet_width / 2),
-                                        draw_y,
-                                        packet_width,
-                                        packet_height * payload_fract)
-        draw_y += packet_height * payload_fract
-        # Packet Footer
-        self.footer_button.setGeometry(area_center_x - (packet_width / 2),
-                                       draw_y,
-                                       packet_width,
-                                       packet_height * footer_fract)
+                                       packet_height)
 
+    def paintEvent(self, event):
+        self.display()
+"""
 
 if __name__ == "__main__":
     # Qt Application
@@ -490,7 +602,8 @@ if __name__ == "__main__":
 
     # Creating the Main Window
     window = MainWindow()
-    window.setCentralWidget(PacketScreen())
+    packets, latency = NetworkPy.ping("192.168.1.254")
+    window.setCentralWidget(PacketScreen(packets[0]))
     window.resize(1280, 720)
     window.show()
 

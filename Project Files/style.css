@@ -130,3 +130,21 @@ QScrollBar:vertical {
     background-color: rgba(0,0,200,1);
     color: white;
 }
+
+#advancedOutputBox{
+    background-color: white;
+}
+
+#etherLayer {
+    background-color: red;
+    margin:0;
+}
+#ipLayer {
+    background-color: blue;
+    margin:0;
+}
+
+#PacketField{
+    background-color: white;
+    padding: 5px;
+}
