@@ -78,11 +78,11 @@ QToolTip {
     font-size:16px;
     background-color:white;
 }
-
+/*
 QScrollBar:vertical {
     width:10px;
 }
-
+*/
 #packetButton_header{
     background-color: rgba(0,255,0,1);
 
@@ -131,8 +131,14 @@ QScrollBar:vertical {
     color: white;
 }
 
-#advancedOutputBox{
-    background-color: white;
+#packetScrollArea{
+    background-color: rgba(0,0,0,0);
+}
+
+#layerTitle{
+    color: white;
+    font-weight: bold;
+    padding: 5px;
 }
 
 #etherLayer {
@@ -142,6 +148,26 @@ QScrollBar:vertical {
 #ipLayer {
     background-color: blue;
     margin:0;
+}
+#tcpLayer {
+    background-color: orange;
+    margin:0;
+}
+#udpLayer {
+    background-color: orange;
+    margin:0;
+}
+#payloadLayer {
+    background-color: green;
+    margin:0;
+}
+#payloadScrollArea {
+    background-color: white;
+}
+
+#payloadLabel {
+    background-color: white;
+    padding: 5px;
 }
 
 #PacketField{

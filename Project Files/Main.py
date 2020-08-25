@@ -14,8 +14,10 @@ import TooltipsPy
 import LearningPy
 
 # The main window of the program
-from scapy.layers.inet import IP, ICMP
+from scapy.layers.http import HTTP
+from scapy.layers.inet import IP, ICMP, TCP, UDP
 from scapy.layers.l2 import Ether
+from scapy.packet import Padding, Raw
 
 
 class MainWindow(QMainWindow):
@@ -406,12 +408,7 @@ class PacketScreen(QWidget):
         QWidget.__init__(self)
 
         layout = QGridLayout()
-
-        # Console Output Box
-        scrollArea = QScrollArea()
-        packet_area = PacketRenderArea(packet)
-        packet_area.setMinimumWidth(500)
-        scrollArea.setWidget(packet_area)
+        self.setLayout(layout)
 
         # Information Area
         info_area = QScrollArea()
@@ -426,11 +423,17 @@ class PacketScreen(QWidget):
         info_label.setText(LearningPy.LEARNING_PACKET)
         info_area.setWidget(info_label)
 
-        # Adding widgets to the ping page layout
         layout.addWidget(info_area, 0, 0)
-        layout.addWidget(packet_area, 0, 1, 2, 1)
 
-        self.setLayout(layout)
+        # PACKET DISPLAY AREA
+        scroll_area = QScrollArea()
+        scroll_area.setObjectName("packetScrollArea")
+
+        scroll_area.setAlignment(Qt.AlignCenter)
+
+        packet_area = PacketRenderArea(packet)
+        scroll_area.setWidget(packet_area)
+        layout.addWidget(scroll_area, 0, 1)
 
 
 class PacketRenderArea(QWidget):
@@ -438,162 +441,241 @@ class PacketRenderArea(QWidget):
     def __init__(self, packet):
         QWidget.__init__(self)
         print(packet.show())
-        packet_layout = QVBoxLayout()
-        packet_layout.setAlignment(Qt.AlignTop)
-        self.setLayout(packet_layout)
-        packet_layout.setSpacing(0)
-        packet_layout.setContentsMargins(0,0,0,0)
+        self.setObjectName("PacketRenderArea")
+        self.packet_layout = QVBoxLayout()
+        self.packet_layout.setAlignment(Qt.AlignTop)
+        self.setLayout(self.packet_layout)
+        self.packet_layout.setSpacing(0)
+        self.packet_layout.setContentsMargins(0, 0, 0, 0)
 
         # ETHERNET LAYER
+        if Ether in packet:
+            self.create_ethernet_layer(packet)
+        # IP LAYER
+        if IP in packet:
+            self.create_ip_layer(packet)
+
+        # ICMP LAYER
+        if ICMP in packet:
+            self.create_icmp_layer(packet)
+        # TCP
+        if TCP in packet:
+            self.create_tcp_layer(packet)
+        # UDP
+        if UDP in packet:
+            self.create_udp_layer(packet)
+        # PADDING
+        if Padding in packet:
+            self.create_padding_layer(packet)
+        # PAYLOAD
+        if Raw in packet:
+            self.create_payload_layer(packet)
+
+    def create_ethernet_layer(self, packet):
         ether_layer = QWidget()
         ether_layer.setObjectName("etherLayer")
         ether_layer_layout = QGridLayout()
         ether_layer.setLayout(ether_layer_layout)
+        # Title
+        ether_layer_title = QLabel("Ethernet Layer")
+        ether_layer_title.setObjectName("layerTitle")
+        ether_layer_title.setAlignment(Qt.AlignCenter)
 
-      
+        src_mac_label = PacketField("Source MAC", packet.src)
+        dest_mac_label = PacketField("Destination MAC", packet.dst)
 
-        dest_mac_label = PacketField("Dst MAC", "")
-        src_mac_label = PacketField("Src MAC", "")
+        ether_layer_layout.addWidget(ether_layer_title, 0, 0, 1, 2)
+        ether_layer_layout.addWidget(dest_mac_label, 1, 1)
+        ether_layer_layout.addWidget(src_mac_label, 1, 0)
 
-        ether_layer_layout.addWidget(dest_mac_label, 1, 0)
-        ether_layer_layout.addWidget(src_mac_label, 1, 1)
+        self.packet_layout.addWidget(ether_layer)
 
+    def create_ip_layer(self, packet):
         # IP LAYER
         ip_layer = QWidget()
         ip_layer.setObjectName("ipLayer")
         ip_layer_layout = QGridLayout()
         ip_layer.setLayout(ip_layer_layout)
+        # Title
+        ip_layer_title = QLabel("Network Layer")
+        ip_layer_title.setObjectName("layerTitle")
+        ip_layer_title.setAlignment(Qt.AlignCenter)
+        ip_layer_layout.addWidget(ip_layer_title, 0, 0)
+        # Row 1
+        row = PacketRow()
+        row.add_field("Source IP", packet[IP].src)
+        row.add_field("Destination IP", packet[IP].dst)
+        ip_layer_layout.addWidget(row, 1, 0)
+        # Row 2
+        row2 = PacketRow()
+        row2.add_field("Version", packet[IP].version)
+        row2.add_field("IHL", packet[IP].ihl)
+        row2.add_field("TOS", packet[IP].tos)
+        row2.add_field("Length", packet[IP].len)
+        row2.add_field("ID", packet[IP].id)
+        ip_layer_layout.addWidget(row2, 2, 0)
+        # Row 3
+        row3 = PacketRow()
+        row3.add_field("Checksum", packet[IP].chksum)
+        row3.add_field("TTL", packet[IP].ttl)
+        row3.add_field("Protocol", packet[IP].proto)
+        row3.add_field("Offset", packet[IP].frag)
+        ip_layer_layout.addWidget(row3, 3, 0)
+        # Row 4
+        row4 = PacketRow()
+        row4.add_field("Flags", packet[IP].flags)
+        ip_layer_layout.addWidget(row4, 4, 0)
 
-        dest_ip_label = PacketField("Dst IP", packet[IP].dst)
-        src_ip_label = PacketField("Src IP", packet[IP].src)
+        self.packet_layout.addWidget(ip_layer)
 
-        ip_layer_layout.addWidget(dest_ip_label, 1, 0)
-        ip_layer_layout.addWidget(src_ip_label, 1, 1)
+    def create_tcp_layer(self, packet):
+        # TCP LAYER
+        tcp_layer = QWidget()
+        tcp_layer.setObjectName("tcpLayer")
+        tcp_layer_layout = QGridLayout()
+        tcp_layer.setLayout(tcp_layer_layout)
+        # Title
+        tcp_layer_title = QLabel("Transport Layer (TCP)")
+        tcp_layer_title.setObjectName("layerTitle")
+        tcp_layer_title.setAlignment(Qt.AlignCenter)
+        tcp_layer_layout.addWidget(tcp_layer_title, 0, 0)
+        # Row 1
+        row = PacketRow()
+        row.add_field("Source Port", packet[TCP].sport)
+        row.add_field("Destination Port", packet[TCP].dport)
+        tcp_layer_layout.addWidget(row, 1, 0)
+        # Row 2
+        row2 = PacketRow()
+        row2.add_field("Sequence Number", packet[TCP].seq)
+        row2.add_field("Acknowledgement Number", packet[TCP].ack)
+        tcp_layer_layout.addWidget(row2, 2, 0)
+        # Row 3
+        row3 = PacketRow()
+        row3.add_field("Data Ofs", packet[TCP].dataofs)
+        row3.add_field("Reserved", packet[TCP].reserved)
+        row3.add_field("Flags", packet[TCP].flags)
+        row3.add_field("Window", packet[TCP].window)
+        tcp_layer_layout.addWidget(row3, 3, 0)
+        # Row 4
+        row4 = PacketRow()
+        row4.add_field("Checksum", packet[TCP].chksum)
+        row4.add_field("Urgent Pointer", packet[TCP].urgptr)
+        row4.add_field("Options", packet[TCP].options)
+        tcp_layer_layout.addWidget(row4, 4, 0)
 
-        packet_layout.addWidget(ether_layer)
-        packet_layout.addWidget(ip_layer)
+        self.packet_layout.addWidget(tcp_layer)
 
-    # def __init__(self, packet):
-    # QWidget.__init__(self)
-    # self.setStyleSheet("QWidget{background-color:white;}")
-    # layout = QGridLayout()
-    # self.setLayout(layout)
-    # packet.show(dump=True)
+    def create_udp_layer(self, packet):
+        # udp LAYER
+        udp_layer = QWidget()
+        udp_layer.setObjectName("udpLayer")
+        udp_layer_layout = QGridLayout()
+        udp_layer.setLayout(udp_layer_layout)
+        # Title
+        udp_layer_title = QLabel("Transport Layer (UDP)")
+        udp_layer_title.setObjectName("layerTitle")
+        udp_layer_title.setAlignment(Qt.AlignCenter)
+        udp_layer_layout.addWidget(udp_layer_title, 0, 0)
+        # Row 1
+        row = PacketRow()
+        row.add_field("Source Port", packet[UDP].sport)
+        row.add_field("Destination Port", packet[UDP].dport)
+        udp_layer_layout.addWidget(row, 1, 0)
+        # Row 2
+        row2 = PacketRow()
+        row2.add_field("Length", packet[UDP].len)
+        row2.add_field("Checksum", packet[UDP].chksum)
+        udp_layer_layout.addWidget(row2, 2, 0)
 
-    # ether_field_names = [field.name for field in Ether.fields_desc]
-    # ip_field_names = [field.name for field in IP.fields_desc]
-    # icmp_field_names = [field.name for field in ICMP.fields_desc]
-    # fields = {field_name: getattr(packet, field_name) for field_name in ether_field_names}
-    # fields2 = {field_name: getattr(packet, field_name) for field_name in ip_field_names}
-    # fields3 = {field_name: getattr(packet, field_name) for field_name in icmp_field_names}
+        self.packet_layout.addWidget(udp_layer)
 
-    # fields = {**fields, **fields2, **fields3}
+    def create_icmp_layer(self, packet):
+        # ICMP LAYER
+        icmp_layer = QWidget()
+        icmp_layer.setObjectName("ipLayer")
+        icmp_layer_layout = QGridLayout()
+        icmp_layer.setLayout(icmp_layer_layout)
+        # Title
+        icmp_layer_title = QLabel("ICMP")
+        icmp_layer_title.setObjectName("layerTitle")
+        icmp_layer_title.setAlignment(Qt.AlignCenter)
+        icmp_layer_layout.addWidget(icmp_layer_title, 0, 0)
+        # Row 1
+        row = PacketRow()
+        row.add_field("Type", packet[ICMP].type)
+        row.add_field("Code", packet[ICMP].code)
+        icmp_layer_layout.addWidget(row, 1, 0)
+        # Row 2
+        row2 = PacketRow()
+        row2.add_field("Checksum", packet[ICMP].chksum)
+        row2.add_field("ID", packet[ICMP].id)
+        row2.add_field("Sequence Number", packet[ICMP].seq)
+        icmp_layer_layout.addWidget(row2, 2, 0)
 
-    # row = 0
-    # column = 0
-    # for field in fields:
-    #    widget = QLabel(f"{field}: {str(fields.get(field))}")
-    #    widget.setObjectName("PacketField")
+        self.packet_layout.addWidget(icmp_layer)
 
-    #    row+=1
-    #    layout.addWidget(widget, row, column)
+    def create_padding_layer(self, packet):
+        padding_layer = QWidget()
+        padding_layer.setObjectName("ipLayer")
+        padding_layer_layout = QVBoxLayout()
+        padding_layer.setLayout(padding_layer_layout)
+        # Title
+        padding_layer_title = QLabel("Padding")
+        padding_layer_title.setObjectName("layerTitle")
+        padding_layer_title.setAlignment(Qt.AlignCenter)
+        padding_layer_layout.addWidget(padding_layer_title)
+        # Row 1
+        padding_scroll = QScrollArea()
+        padding_scroll.setObjectName("payloadScrollArea")
+        padding_label = QLabel(str(packet[Padding].load))
+        padding_label.setObjectName("payloadLabel")
+        padding_label.setWordWrap(True)
+        padding_scroll.setWidget(padding_label)
+        padding_layer_layout.addWidget(padding_scroll)
 
+        self.packet_layout.addWidget(padding_layer)
+
+    def create_payload_layer(self, packet):
+        payload_layer = QWidget()
+        payload_layer.setObjectName("payloadLayer")
+        payload_layer_layout = QVBoxLayout()
+        payload_layer.setLayout(payload_layer_layout)
+        # Title
+        payload_layer_title = QLabel("Payload")
+        payload_layer_title.setObjectName("layerTitle")
+        payload_layer_title.setAlignment(Qt.AlignCenter)
+        payload_layer_layout.addWidget(payload_layer_title)
+        # Row 1
+        payload_scroll = QScrollArea()
+        payload_scroll.setObjectName("payloadScrollArea")
+        payload_label = QLabel(str(packet[Raw].load))
+        payload_label.setObjectName("payloadLabel")
+        payload_label.setWordWrap(True)
+        payload_scroll.setWidget(payload_label)
+        payload_layer_layout.addWidget(payload_scroll)
+
+        self.packet_layout.addWidget(payload_layer)
 
 class PacketField(QLabel):
-    def __init__(self, string, value):
+    def __init__(self, string, value, tooltip=""):
         QLabel.__init__(self)
         self.setObjectName("PacketField")
         self.setText(f"{string} : {value}")
         self.setFixedHeight(35)
+        self.setToolTip(tooltip)
 
-"""
-class PacketRenderArea(QWidget):
+
+class PacketRow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
-        self.display = self.packet_top_level
-        self.layout = QVBoxLayout()
+        self.setLayout(QGridLayout())
+        self.layout().setContentsMargins(0, 2, 0, 2)
+        self.count = 0
 
-        self.header_button = QPushButton("View HEADER Data")
-        self.header_button.setObjectName("packetButton_header")
-        self.header_button.clicked.connect(self.render_packet_header)
+    def add_field(self, name, data, tooltip=""):
+        self.layout().addWidget(PacketField(name, data, tooltip=tooltip), 0, self.count)
+        self.count += 1
 
-        self.payload_button = QPushButton("View PAYLOAD Data")
-        self.payload_button.setObjectName("packetButton_payload")
-        self.payload_button.clicked.connect(lambda a: print("Payload Clicked"))
-
-        self.footer_button = QPushButton("View FOOTER Data")
-        self.footer_button.setObjectName("packetButton_footer")
-        self.footer_button.clicked.connect(lambda a: print("Footer Clicked"))
-
-        self.layout.addWidget(self.header_button)
-        self.layout.addWidget(self.payload_button)
-        self.layout.addWidget(self.footer_button)
-        self.setLayout(self.layout)
-
-    def render_packet_header(self):
-        self.display = self.packet_header
-        self.payload_button.hide()
-        self.footer_button.hide()
-        self.setLayout(self.layout)
-
-    def packet_top_level(self):
-        area_width = self.width()
-        area_height = self.height()
-        area_center_x = area_width / 2
-        area_center_y = area_height / 2
-
-        packet_width = self.width() * (2 / 3)
-        packet_height = self.height() * (7 / 8)
-
-        header_fract = 4 / 10
-        payload_fract = 4 / 10
-        footer_fract = 2 / 10
-
-        draw_y = (area_height - packet_height) / 2
-
-        # Packet Header
-        self.header_button.setGeometry(area_center_x - (packet_width / 2),
-                                       draw_y,
-                                       packet_width,
-                                       packet_height * header_fract)
-        draw_y += packet_height * header_fract
-
-        # Packet Payload
-        self.payload_button.setGeometry(area_center_x - (packet_width / 2),
-                                        draw_y,
-                                        packet_width,
-                                        packet_height * payload_fract)
-        draw_y += packet_height * payload_fract
-
-        # Packet Footer
-        self.footer_button.setGeometry(area_center_x - (packet_width / 2),
-                                       draw_y,
-                                       packet_width,
-                                       packet_height * footer_fract)
-
-    def packet_header(self):
-        area_width = self.width()
-        area_height = self.height()
-        area_center_x = area_width / 2
-        area_center_y = area_height / 2
-
-        packet_width = self.width() * (2 / 3)
-        packet_height = self.height() * (7 / 8)
-
-        header_fract = 4 / 10
-        payload_fract = 4 / 10
-        footer_fract = 2 / 10
-
-        draw_y = (area_height - packet_height) / 2
-        # Packet Header
-        self.header_button.setGeometry(area_center_x - (packet_width / 2),
-                                       draw_y,
-                                       packet_width,
-                                       packet_height)
-
-    def paintEvent(self, event):
-        self.display()
-"""
 
 if __name__ == "__main__":
     # Qt Application
@@ -603,7 +685,9 @@ if __name__ == "__main__":
     # Creating the Main Window
     window = MainWindow()
     packets, latency = NetworkPy.ping("192.168.1.254")
-    window.setCentralWidget(PacketScreen(packets[0]))
+    packet = Ether()/IP()/UDP()/TCP()/ICMP()/"HELLO WORLD!"
+
+    window.setCentralWidget(PacketScreen(packet))
     window.resize(1280, 720)
     window.show()
 
