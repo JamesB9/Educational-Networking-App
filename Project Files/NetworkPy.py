@@ -85,7 +85,6 @@ def traceroute(dst_ip):
     return reply_packets
 
 
-
 class Sniffer(Thread):
     def  __init__(self):
         super().__init__()

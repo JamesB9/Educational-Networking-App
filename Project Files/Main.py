@@ -104,105 +104,6 @@ class MainWindow(QMainWindow):
         print("Central Widget: %s", self.centralWidget())
 
 
-class PingScreen(QWidget):
-    def __init__(self):
-        QWidget.__init__(self)
-
-        layout = QGridLayout()
-
-        input_form = self.init_form()
-
-        # Console Output Box
-        output_box_area = QScrollArea()
-        output_box_area.setMinimumWidth(500)
-        output_box_area.setObjectName("outputBox")
-
-        self.output_box = QLabel()
-        self.output_box.setText("This is where the output of your PING will appear")
-
-        output_box_area.setWidget(self.output_box)
-
-        # Information Area
-        info_area = QScrollArea()
-        info_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        info_area.setFixedWidth(400)
-        info_area.setObjectName("learningBox")
-        # Label
-        info_label = QLabel()
-        info_label.setFixedWidth(360)
-        info_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-        info_label.setWordWrap(True)
-        info_label.setText(LearningPy.LEARNING_PING)
-        info_area.setWidget(info_label)
-
-        # Adding widgets to the ping page layout
-        layout.addWidget(input_form, 0, 0)
-        layout.addWidget(output_box_area, 0, 1, 2, 1)
-        layout.addWidget(info_area, 1, 0)
-
-        self.setLayout(layout)
-
-    def init_form(self):
-        input_form = QWidget()
-        input_form.setMaximumWidth(400)
-        input_form.setMaximumHeight(150)
-        input_form.setObjectName("PingForm")
-
-        # Host Address Label & Input Field
-        ipv4_address_label = QLabel('Host Address:')
-        self.ipv4_address_edit = QLineEdit()
-        ipv4_address_label.setToolTip(TooltipsPy.HOST_ADDRESS)
-        self.ipv4_address_edit.setToolTip(TooltipsPy.HOST_ADDRESS)
-
-        # Number of requests Label & Input Field
-        count_label = QLabel('No. of Requests:')
-        self.count_edit = QLineEdit()
-        count_label.setToolTip(TooltipsPy.NUMBER_OF_REQUESTS)
-        self.count_edit.setToolTip(TooltipsPy.NUMBER_OF_REQUESTS)
-
-        ping_button = QPushButton("COMMENCE PING")
-        ping_button.clicked.connect(self.ping)
-
-        layout = QFormLayout()
-        layout.setLabelAlignment(Qt.AlignLeft)
-        layout.setFormAlignment(Qt.AlignLeft)
-
-        layout.addRow(ipv4_address_label, self.ipv4_address_edit)
-        layout.addRow(count_label, self.count_edit)
-        layout.addRow(ping_button)
-
-        input_form.setLayout(layout)
-
-        return input_form
-
-    def ping(self):
-        print(f"PINGING {self.ipv4_address_edit.text()}")
-
-        if self.count_edit.text() != '':
-            response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1,
-                                                            count=self.count_edit.text())
-        else:
-            response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1)
-
-        if all(packet is None for packet in response_packets):  # If all packets are None
-            ping_output = f"The Host ({self.ipv4_address_edit.text()}) is Down"
-            self.output_box.setText(ping_output)
-            self.output_box.adjustSize()
-        else:  # If at least one packet is returned
-            ping_output = f"The Host ({self.ipv4_address_edit.text()}) is UP\n"
-            for index, latency in enumerate(latency_list):
-                ping_output += f"Packet {index + 1} : {latency:.1f} ms\n"
-
-            # Calculating average, min and max ping
-            average_ping = sum(latency_list) / len(latency_list)
-            max_ping = max(latency_list)
-            min_ping = min(latency_list)
-            ping_output += f"Average: {average_ping:.1f} ms, Min: {min_ping:.1f} ms, Max: {max_ping:.1f} ms"
-            print(ping_output)
-            self.output_box.setText(ping_output)
-            self.output_box.adjustSize()
-
-
 class PacketSniffer(QWidget):
     def __init__(self):
         QWidget.__init__(self)
@@ -335,8 +236,8 @@ class TracerouteScreen(QWidget):
         output_box_area.setMinimumWidth(500)
         output_box_area.setObjectName("outputBox")
 
-        self.output_box = QLabel()
-        self.output_box.setText("This is where the output of your Traceroute will appear")
+        self.output_box = AdvancedOutput()
+        self.output_box.add_new_line("This is where the output of your Traceroute will appear")
 
         output_box_area.setWidget(self.output_box)
 
@@ -390,17 +291,14 @@ class TracerouteScreen(QWidget):
         print(f"TRACEROUTE: {self.ipv4_address_edit.text()}")
         response_packets = NetworkPy.traceroute(self.ipv4_address_edit.text())
 
-        output_text = f"Traceroute to host ({self.ipv4_address_edit.text()}) :\n\n"
+        self.output_box.add_new_line(f"Traceroute to host ({self.ipv4_address_edit.text()}) :\n\n")
         for index, packet in enumerate(response_packets):
             if packet is None:
-                output_text += f"{index + 1:>02} - *\n"
+                self.output_box.add_new_line(f"{index + 1:>02} - *")
             else:
-                output_text += f"{index + 1:>02} - {packet.src}\n"
+                self.output_box.add_new_line(f"{index + 1:>02} - {packet.src}\n", packet=packet)
 
-        output_text += f"\nTraceroute Completed to {self.ipv4_address_edit.text()}"
-
-        self.output_box.setText(output_text)
-        self.output_box.adjustSize()
+        self.output_box.add_new_line(f"\nTraceroute Completed to {self.ipv4_address_edit.text()}")
 
 
 class PacketScreen(QWidget):
@@ -701,7 +599,7 @@ class AdvancedOutput(QWidget):
         self.layout.addWidget(new_line)
 
 
-class TestPingScreen(QWidget):
+class PingScreen(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
@@ -797,7 +695,6 @@ class TestPingScreen(QWidget):
             self.output_box.add_new_line(ping_output)
 
 
-
 if __name__ == "__main__":
     # Qt Application
     app = QApplication(sys.argv)
@@ -809,7 +706,7 @@ if __name__ == "__main__":
     packets, latency = NetworkPy.ping("192.168.1.254")
     packet = Ether() / IP() / UDP() / TCP() / ICMP() / "HELLO WORLD!"
 
-    window.setCentralWidget(TestPingScreen())
+    window.setCentralWidget(PacketScreen(packet))
     window.resize(1280, 720)
     window.show()
 
