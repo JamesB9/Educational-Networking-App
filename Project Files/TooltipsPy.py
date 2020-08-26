@@ -14,42 +14,104 @@ DURATION = str("<b>Duration:</b><br>" +
 # PACKET FIELDS
 
 # Ethernet
-MAC_ADDRESS_DST = str("")
-MAC_ADDRESS_SRC = str("")
-TYPE = str("")
+MAC_ADDRESS_DST = str("<b>Destination MAC Address:</b><br>" +
+                      "A MAC address is a unique 48 bit code assign to each Network Interface Card." +
+                      "The Destination MAC Address is of the NIC that receives the packet"
+                      )
+
+MAC_ADDRESS_SRC = str("<b>Source MAC Address:</b><br>" +
+                      "A MAC address is a unique 48 bit code assign to each Network Interface Card." +
+                      "The Source MAC Address is of the NIC that sent the packet"
+                      )
+
+
+TYPE = str("<b>Type:</b><br>" +
+           "How long in seconds to sniff."
+           )
 
 # IP
-VERSION = str("")
-IHL = str("")
-TOS = str("")
-IP_LENGTH = str("")
-ID = str("")
-FLAGS = str("")
-FRAG = str("")
-TTL = str("")
-PROTO = str("")
-CHECKSUM = str("")
-IP_ADDRESS_SRC = str("")
-IP_ADDRESS_DST = str("")
+VERSION = str("<b>Version:</b><br>" +
+              "How long in seconds to sniff."
+              )
+IHL = str("<b>Duration:</b><br>" +
+          "How long in seconds to sniff."
+          )
+TOS = str("<b>Duration:</b><br>" +
+          "How long in seconds to sniff."
+          )
+IP_LENGTH = str("<b>Duration:</b><br>" +
+                "How long in seconds to sniff."
+                )
+ID = str("<b>Duration:</b><br>" +
+         "How long in seconds to sniff."
+         )
+FLAGS = str("<b>Duration:</b><br>" +
+            "How long in seconds to sniff."
+            )
+FRAG = str("<b>Duration:</b><br>" +
+           "How long in seconds to sniff."
+           )
+TTL = str("<b>Duration:</b><br>" +
+          "How long in seconds to sniff."
+          )
+PROTO = str("<b>Duration:</b><br>" +
+            "How long in seconds to sniff."
+            )
+CHECKSUM = str("<b>Duration:</b><br>" +
+               "How long in seconds to sniff."
+               )
+IP_ADDRESS_SRC = str("<b>Duration:</b><br>" +
+                     "How long in seconds to sniff."
+                     )
+IP_ADDRESS_DST = str("<b>Duration:</b><br>" +
+                     "How long in seconds to sniff."
+                     )
 
 # TCP / UDP
-SOURCE_PORT = str("")
-DESTINATION_PORT = str("")
-SEQ = str("")
-ACK = str("")
-DATAOFS = str("")
-RESERVED = str("")
-WINDOW = str("")
-URGPTR = str("")
-OPTIONS = str("")
+SOURCE_PORT = str("<b>Duration:</b><br>" +
+                  "How long in seconds to sniff."
+                  )
+DESTINATION_PORT = str("<b>Duration:</b><br>" +
+                       "How long in seconds to sniff."
+                       )
+SEQ = str("<b>Duration:</b><br>" +
+          "How long in seconds to sniff."
+          )
+ACK = str("<b>Duration:</b><br>" +
+          "How long in seconds to sniff."
+          )
+DATAOFS = str("<b>Duration:</b><br>" +
+              "How long in seconds to sniff."
+              )
+RESERVED = str("<b>Duration:</b><br>" +
+               "How long in seconds to sniff."
+               )
+WINDOW = str("<b>Duration:</b><br>" +
+             "How long in seconds to sniff."
+             )
+URGPTR = str("<b>Duration:</b><br>" +
+             "How long in seconds to sniff."
+             )
+OPTIONS = str("<b>Duration:</b><br>" +
+              "How long in seconds to sniff."
+              )
 
 # ICMP
-TYPE = str("")
-CODE = str("")
-ID = str("")
+TYPE = str("<b>Duration:</b><br>" +
+           "How long in seconds to sniff."
+           )
+CODE = str("<b>Duration:</b><br>" +
+           "How long in seconds to sniff."
+           )
+ID = str("<b>Duration:</b><br>" +
+         "How long in seconds to sniff."
+         )
 
 # PADDING
-PADDING = str("")
-
+PADDING = str("<b>Duration:</b><br>" +
+              "How long in seconds to sniff."
+              )
 # PAYLOAD
-PAYLOAD = str("")
+PAYLOAD = str("<b>Duration:</b><br>" +
+              "How long in seconds to sniff."
+              )

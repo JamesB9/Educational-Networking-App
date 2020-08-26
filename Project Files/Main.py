@@ -481,8 +481,8 @@ class PacketRenderArea(QWidget):
         ether_layer_title.setObjectName("layerTitle")
         ether_layer_title.setAlignment(Qt.AlignCenter)
 
-        src_mac_label = PacketField("Source MAC", packet.src)
-        dest_mac_label = PacketField("Destination MAC", packet.dst)
+        src_mac_label = PacketField("Source MAC", packet.src, tooltip=TooltipsPy.MAC_ADDRESS_SRC)
+        dest_mac_label = PacketField("Destination MAC", packet.dst, tooltip=TooltipsPy.MAC_ADDRESS_DST)
 
         ether_layer_layout.addWidget(ether_layer_title, 0, 0, 1, 2)
         ether_layer_layout.addWidget(dest_mac_label, 1, 1)
@@ -656,6 +656,7 @@ class PacketRenderArea(QWidget):
 
         self.packet_layout.addWidget(payload_layer)
 
+
 class PacketField(QLabel):
     def __init__(self, string, value, tooltip=""):
         QLabel.__init__(self)
@@ -677,17 +678,138 @@ class PacketRow(QWidget):
         self.count += 1
 
 
+class AdvancedOutput(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+
+        self.layout = QVBoxLayout()
+        self.layout.setAlignment(Qt.AlignTop)
+        self.setLayout(self.layout)
+        self.setObjectName("AdvancedOutput")
+        self.setMinimumHeight(5000)
+        self.layout.expandingDirections()
+        # self.packet_layout.setSpacing(0)
+        # self.packet_layout.setContentsMargins(0, 0, 0, 0)
+
+    def add_new_line(self, string, packet=""):
+        new_line = QLabel(string)
+        new_line.setObjectName("AdvancedLine")
+        if packet != "":
+            global window
+            new_line.mousePressEvent = lambda a: window.setCentralWidget(PacketScreen(packet))
+        print("New Line:", string)
+        self.layout.addWidget(new_line)
+
+
+class TestPingScreen(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+
+        layout = QGridLayout()
+
+        input_form = self.init_form()
+
+        # Console Output Box
+        output_box_area = QScrollArea()
+        output_box_area.setMinimumWidth(500)
+        output_box_area.setObjectName("outputBox")
+
+        self.output_box = AdvancedOutput()
+        self.output_box.add_new_line("This is where the output of your PING will appear")
+
+        output_box_area.setWidget(self.output_box)
+
+        # Information Area
+        info_area = QScrollArea()
+        info_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        info_area.setFixedWidth(400)
+        info_area.setObjectName("learningBox")
+        # Label
+        info_label = QLabel()
+        info_label.setFixedWidth(360)
+        info_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        info_label.setWordWrap(True)
+        info_label.setText(LearningPy.LEARNING_PING)
+        info_area.setWidget(info_label)
+
+        # Adding widgets to the ping page layout
+        layout.addWidget(input_form, 0, 0)
+        layout.addWidget(output_box_area, 0, 1, 2, 1)
+        layout.addWidget(info_area, 1, 0)
+
+        self.setLayout(layout)
+
+    def init_form(self):
+        input_form = QWidget()
+        input_form.setMaximumWidth(400)
+        input_form.setMaximumHeight(150)
+        input_form.setObjectName("PingForm")
+
+        # Host Address Label & Input Field
+        ipv4_address_label = QLabel('Host Address:')
+        self.ipv4_address_edit = QLineEdit()
+        ipv4_address_label.setToolTip(TooltipsPy.HOST_ADDRESS)
+        self.ipv4_address_edit.setToolTip(TooltipsPy.HOST_ADDRESS)
+
+        # Number of requests Label & Input Field
+        count_label = QLabel('No. of Requests:')
+        self.count_edit = QLineEdit()
+        count_label.setToolTip(TooltipsPy.NUMBER_OF_REQUESTS)
+        self.count_edit.setToolTip(TooltipsPy.NUMBER_OF_REQUESTS)
+
+        ping_button = QPushButton("COMMENCE PING")
+        ping_button.clicked.connect(self.ping)
+
+        layout = QFormLayout()
+        layout.setLabelAlignment(Qt.AlignLeft)
+        layout.setFormAlignment(Qt.AlignLeft)
+
+        layout.addRow(ipv4_address_label, self.ipv4_address_edit)
+        layout.addRow(count_label, self.count_edit)
+        layout.addRow(ping_button)
+
+        input_form.setLayout(layout)
+
+        return input_form
+
+    def ping(self):
+        print(f"PINGING {self.ipv4_address_edit.text()}")
+
+        if self.count_edit.text() != '':
+            response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1,
+                                                            count=self.count_edit.text())
+        else:
+            response_packets, latency_list = NetworkPy.ping(self.ipv4_address_edit.text(), timeout=1)
+
+        if all(packet is None for packet in response_packets):  # If all packets are None
+            ping_output = f"The Host ({self.ipv4_address_edit.text()}) is Down"
+            self.output_box.add_new_line(ping_output)
+        else:  # If at least one packet is returned
+            ping_output = f"The Host ({self.ipv4_address_edit.text()}) is UP\n"
+            for index, latency in enumerate(latency_list):
+                self.output_box.add_new_line(f"Packet {index + 1} : {latency:.1f} ms", packet=response_packets[index])
+
+            # Calculating average, min and max ping
+            average_ping = sum(latency_list) / len(latency_list)
+            max_ping = max(latency_list)
+            min_ping = min(latency_list)
+            ping_output = f"Average: {average_ping:.1f} ms, Min: {min_ping:.1f} ms, Max: {max_ping:.1f} ms"
+            self.output_box.add_new_line(ping_output)
+
+
+
 if __name__ == "__main__":
     # Qt Application
     app = QApplication(sys.argv)
     app.setStyleSheet(open("style.css").read())
 
     # Creating the Main Window
+    global window
     window = MainWindow()
     packets, latency = NetworkPy.ping("192.168.1.254")
-    packet = Ether()/IP()/UDP()/TCP()/ICMP()/"HELLO WORLD!"
+    packet = Ether() / IP() / UDP() / TCP() / ICMP() / "HELLO WORLD!"
 
-    window.setCentralWidget(PacketScreen(packet))
+    window.setCentralWidget(TestPingScreen())
     window.resize(1280, 720)
     window.show()
 

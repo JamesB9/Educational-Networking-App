@@ -174,3 +174,15 @@ QScrollBar:vertical {
     background-color: white;
     padding: 5px;
 }
+
+#AdvancedOutput{
+    background-color: yellow;
+}
+
+#AdvancedLine{
+    border-style: none;
+    color:yellow;
+}
+#AdvancedLine:hover{
+    background-color: rgba(0,255,0,0.2);
+}
