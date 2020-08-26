@@ -8,5 +8,48 @@ NUMBER_OF_REQUESTS = str("<b>Number of Requests:</b><br>" +
                          )
 
 DURATION = str("<b>Duration:</b><br>" +
-                   "How long in seconds to sniff."
-                   )
+               "How long in seconds to sniff."
+               )
+
+# PACKET FIELDS
+
+# Ethernet
+MAC_ADDRESS_DST = str("")
+MAC_ADDRESS_SRC = str("")
+TYPE = str("")
+
+# IP
+VERSION = str("")
+IHL = str("")
+TOS = str("")
+IP_LENGTH = str("")
+ID = str("")
+FLAGS = str("")
+FRAG = str("")
+TTL = str("")
+PROTO = str("")
+CHECKSUM = str("")
+IP_ADDRESS_SRC = str("")
+IP_ADDRESS_DST = str("")
+
+# TCP / UDP
+SOURCE_PORT = str("")
+DESTINATION_PORT = str("")
+SEQ = str("")
+ACK = str("")
+DATAOFS = str("")
+RESERVED = str("")
+WINDOW = str("")
+URGPTR = str("")
+OPTIONS = str("")
+
+# ICMP
+TYPE = str("")
+CODE = str("")
+ID = str("")
+
+# PADDING
+PADDING = str("")
+
+# PAYLOAD
+PAYLOAD = str("")
