@@ -1,0 +1,188 @@
+QMenuBar{
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 lightgray, stop:1 darkgray);
+    padding: 5px;
+    font-weight: bold;
+    font-family: helvetica;
+    font-size: 16px;
+
+    spacing:15px;
+}
+
+QMenuBar::item{
+    color:black;
+    background-color: none;
+}
+QMenuBar::item:selected{
+    font-size: 24px;
+    color:white;
+    background-color: rgba(0,0,0,0);
+    color: white;
+}
+QMenuBar::item:pressed{
+    background-color: gray;
+}
+
+QMainWindow{
+    background-color: qlineargradient(x1:0, y1:025, x2:0, y2:1, stop:0 black, stop:1 gray);
+}
+
+QMenu{
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 lightgray, stop:1 darkgray);
+}
+
+QStatusBar{
+    background-color:white;
+}
+
+#PingForm{
+    background-color:white;
+}
+#PingForm QPushButton{
+    padding:4px;
+    font-size:16px;
+}
+
+QLabel{
+    font-size: 20px;
+}
+
+#outputBox{
+    background-color: black;
+    color:#33FF33;
+    border-style: solid;
+    padding:10px;
+    border:1px solid #33FF33;
+}
+#outputBox QLabel{
+    background-color: rgba(1,1,1,1);
+    color: #33FF33;
+}
+
+#learningBox{
+    background-color: white;
+    color: #33FF33;
+    border-style: solid;
+    padding:10px;
+}
+#learningBox QLabel{
+    background-color: rgba(0,0,0,0);
+    color: black;
+}
+
+QLineEdit{
+    font-size: 20px;
+    padding: 3px;
+}
+QToolTip {
+    padding:2px;
+    font-size:16px;
+    background-color:white;
+}
+/*
+QScrollBar:vertical {
+    width:10px;
+}
+*/
+#packetButton_header{
+    background-color: rgba(0,255,0,1);
+
+    border-style: outset;
+    border-width: 6px 6px 2px 6px;
+    border-color:black;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+
+    font-size:32px;
+    font-weight:800;
+}
+#packetButton_header:hover{
+    background-color: rgba(0,200,0,1);
+    color: white;
+}
+
+#packetButton_payload{
+    background-color: rgba(255,255,0,1);
+    border-style: outset;
+    border-width: 2px 6px 2px 6px;
+    border-color:black;
+
+    font-size:32px;
+    font-weight:800;
+}
+#packetButton_payload:hover{
+    background-color: rgba(200,200,0,1);
+    color: white;
+}
+
+#packetButton_footer{
+    background-color: rgba(0,0,255,1);
+
+    border-style: outset;
+    border-width: 2px 6px 6px 6px;
+    border-color:black;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+
+    font-size:32px;
+    font-weight:800;
+}
+#packetButton_footer:hover{
+    background-color: rgba(0,0,200,1);
+    color: white;
+}
+
+#packetScrollArea{
+    background-color: rgba(0,0,0,0);
+}
+
+#layerTitle{
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+#etherLayer {
+    background-color: red;
+    margin:0;
+}
+#ipLayer {
+    background-color: blue;
+    margin:0;
+}
+#tcpLayer {
+    background-color: orange;
+    margin:0;
+}
+#udpLayer {
+    background-color: orange;
+    margin:0;
+}
+#payloadLayer {
+    background-color: green;
+    margin:0;
+}
+#payloadScrollArea {
+    background-color: white;
+}
+
+#payloadLabel {
+    background-color: white;
+    padding: 5px;
+}
+
+#PacketField{
+    background-color: white;
+    padding: 5px;
+}
+
+#AdvancedOutput{
+    background-color: yellow;
+}
+
+#AdvancedLine{
+    border-style: none;
+    color:yellow;
+}
+#AdvancedLine:hover{
+    background-color: rgba(0,255,0,0.2);
+}

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9ca33dc0-5a72-490e-8039-ad972305fb39" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1fBL5QQ3JOrF7YRd2pYlILsaQCu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/PySide2 Qt Tutorials" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\JamesBurling\Documents\GitHub\Educational-Networking-App\PySide2 Qt Tutorials\assets" />
+      <recent name="C:\Users\JamesBurling\Documents\GitHub\Educational-Networking-App\PySide2 Qt Tutorials" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\JamesBurling\Documents\GitHub\Educational-Networking-App\PySide2 Qt Tutorials" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Main">
+    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Educational-Networking-App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project Files" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project Files/Main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="NetworkPy (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Educational-Networking-App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project Files" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project Files/NetworkPy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="NetworkPy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Educational-Networking-App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project Files" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\JamesBurling\Documents\GitHub\Educational-Networking-App\Project Files\NetworkPy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="stackedWidget test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Educational-Networking-App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Testing Things" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/stackedWidget test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tabs example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Educational-Networking-App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Testing Things" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Testing Things/tabs example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Main" />
+        <item itemvalue="Python.NetworkPy (1)" />
+        <item itemvalue="Python.NetworkPy" />
+        <item itemvalue="Python.tabs example" />
+        <item itemvalue="Python.stackedWidget test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ca33dc0-5a72-490e-8039-ad972305fb39" name="Default Changelist" comment="" />
+      <created>1595686355875</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1595686355875</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1041" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596448870405">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="1041" y="507" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596448870405" />
+    <state x="1010" y="452" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596450785607">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="1010" y="452" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1596450785607" />
+    <state width="2539" height="304" key="GridCell.Tab.0.bottom" timestamp="1598475264478">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1899" height="213" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1598455135586" />
+    <state width="2539" height="304" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598475264478" />
+    <state width="2539" height="304" key="GridCell.Tab.0.center" timestamp="1598475264478">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1899" height="213" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1598455135586" />
+    <state width="2539" height="304" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598475264478" />
+    <state width="2539" height="304" key="GridCell.Tab.0.left" timestamp="1598475264478">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1899" height="213" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1598455135586" />
+    <state width="2539" height="304" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598475264478" />
+    <state width="2539" height="304" key="GridCell.Tab.0.right" timestamp="1598475264478">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1899" height="213" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@-1920.360.1920.1050" timestamp="1598455135586" />
+    <state width="2539" height="304" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598475264478" />
+    <state width="2539" height="496" key="GridCell.Tab.1.bottom" timestamp="1598387687674">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2539" height="496" key="GridCell.Tab.1.bottom/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598387687674" />
+    <state width="2539" height="496" key="GridCell.Tab.1.center" timestamp="1598387687674">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2539" height="496" key="GridCell.Tab.1.center/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598387687674" />
+    <state width="2539" height="496" key="GridCell.Tab.1.left" timestamp="1598387687674">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2539" height="496" key="GridCell.Tab.1.left/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598387687674" />
+    <state width="2539" height="496" key="GridCell.Tab.1.right" timestamp="1598387687674">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2539" height="496" key="GridCell.Tab.1.right/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598387687674" />
+    <state x="560" y="569" key="SettingsEditor" timestamp="1595946502916">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="560" y="569" key="SettingsEditor/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1595946502916" />
+    <state x="943" y="317" width="672" height="678" key="search.everywhere.popup" timestamp="1598103854814">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="943" y="317" width="672" height="678" key="search.everywhere.popup/0.0.2560.1410/-1920.360.1920.1050@0.0.2560.1410" timestamp="1598103854814" />
+  </component>
+</project>
