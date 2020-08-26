@@ -216,7 +216,7 @@ class PacketSniffer(QWidget):
         output_box_area.setMinimumWidth(500)
         output_box_area.setObjectName("outputBox")
 
-        self.output_box = QLabel()
+        self.output_box = AdvancedOutput()
         self.output_box.setText("This is where the output of your SNIFF will appear")
 
         output_box_area.setWidget(self.output_box)
@@ -248,7 +248,7 @@ class PacketSniffer(QWidget):
         input_form.setMaximumHeight(150)
         input_form.setObjectName("PingForm")
 
-        duration = QLabel('Duration:')
+        duration = QLabel('Duration (s):')
         self.duration_edit = QLineEdit()
         duration.setToolTip(TooltipsPy.DURATION)
         self.duration_edit.setToolTip(TooltipsPy.DURATION)
@@ -268,20 +268,22 @@ class PacketSniffer(QWidget):
         return input_form
 
     def sniff(self):
-        sniffer = NetworkPy.Sniffer()
+        sniffer = NetworkPy.Sniffer(int(self.duration_edit.text()))
         sniff_output = f"[*] Start sniffing...\n"
-
         sniffer.start()
-        sniff_output += sniffer.pkt
-        print(sniff_output)
-        # self.output_box.setText(sniff_output)
-        # self.output_box.adjustSize()
+        print(sniffer.time)
+        
+        t_end = time.time() + int(self.duration_edit.text())
+        while time.time() < t_end:
+            continue
 
-        # sniffer.join(2.0)
-        # if sniffer.is_alive():
-        #     sniffer.socket.close()
+        sniffer.join(2.0)
+        if sniffer.is_alive():
+            sniffer.socket.close()
+        
+        # ip_layer = packet.getlayer(IP)
+        print(sniffer.plist)
 
-        sniff_output += "[*] Stop sniffing"
         # self.output_box.setText(sniff_output)
         # self.output_box.adjustSize()
 
@@ -809,7 +811,7 @@ if __name__ == "__main__":
     packets, latency = NetworkPy.ping("192.168.1.254")
     packet = Ether() / IP() / UDP() / TCP() / ICMP() / "HELLO WORLD!"
 
-    window.setCentralWidget(TestPingScreen())
+    window.setCentralWidget(PacketScreen(packet))
     window.resize(1280, 720)
     window.show()
 

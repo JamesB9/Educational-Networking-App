@@ -87,13 +87,15 @@ def traceroute(dst_ip):
 
 
 class Sniffer(Thread):
-    def  __init__(self):
+    def  __init__(self, duration):
         super().__init__()
 
         self.daemon = True
         self.socket = None
         self.stop_sniffer = Event()
         self.pkt = ''
+        self.plist = []
+        self.time = duration
 
     def run(self):
         self.socket = conf.L2listen(
@@ -105,7 +107,7 @@ class Sniffer(Thread):
             opened_socket=self.socket,
             prn=self.print_packet,
             stop_filter=self.should_stop_sniffer,
-            timeout = 10
+            timeout = self.time
         )
 
     def join(self, timeout=None):
@@ -118,3 +120,4 @@ class Sniffer(Thread):
     def print_packet(self, packet):
         ip_layer = packet.getlayer(IP)
         self.pkt = "[!] New Packet: {src} -> {dst}\n".format(src=ip_layer.src, dst=ip_layer.dst)
+        self.plist.append(packet)
